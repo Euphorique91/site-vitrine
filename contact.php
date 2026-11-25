@@ -28,7 +28,30 @@ $json = stripos($_SERVER['HTTP_ACCEPT'] ?? '', 'application/json') !== false;
 header('X-Robots-Tag: noindex');
 header('Cache-Control: no-store');
 
+/** Identifiants d'envoi lus hors du site (jamais dans le dépôt). */
+function configEnvoi(string $dossier, string $prive): ?array
+{
+    foreach ([$dossier . '/config.php', $prive . '/appli-prod/config.php'] as $fichier) {
+        if (is_file($fichier) && is_readable($fichier)) {
+            $cfg = require $fichier;
+            if (is_array($cfg) && !empty($cfg['smtp']['user']) && !empty($cfg['smtp']['password'])) {
+                return $cfg['smtp'];
+            }
+        }
+    }
+    return null;
+}
+
 if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'POST') {
+    // Contrôle sans envoi : https://gourmetdistri.fr/contact.php?verif
+    if (isset($_GET['verif'])) {
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode([
+            'envoi_configure' => configEnvoi($dossier, $prive) !== null,
+            'copie_de_secours_possible' => is_dir($dossier) ? is_writable($dossier) : is_writable($prive),
+        ]);
+        exit;
+    }
     header('Location: /#contact', true, 303);
     exit;
 }
@@ -113,16 +136,7 @@ if (preg_match_all('#https?://|www\.#i', $d['besoins']) > 2) {
 }
 
 /* ------------------------------------------------------------------ configuration privée */
-$smtp = null;
-foreach ([$dossier . '/config.php', $prive . '/appli-prod/config.php'] as $fichier) {
-    if (is_file($fichier) && is_readable($fichier)) {
-        $cfg = require $fichier;
-        if (is_array($cfg) && !empty($cfg['smtp']['user']) && !empty($cfg['smtp']['password'])) {
-            $smtp = $cfg['smtp'];
-            break;
-        }
-    }
-}
+$smtp = configEnvoi($dossier, $prive);
 
 /* ------------------------------------------------------------------ limite par visiteur */
 $ip = (string) ($_SERVER['REMOTE_ADDR'] ?? '');
