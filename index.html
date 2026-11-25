@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gourmet Distri · Grossiste alimentaire au service de la restauration</title>
+<meta name="description" content="Gourmet Distri, grossiste familial en Essonne : fruits et légumes, crèmerie, épicerie… livrés chaque matin aux restaurateurs du 91 et du sud 77.">
+<!-- Page d'attente : retirer « noindex » à la mise en ligne du site vitrine -->
+<meta name="robots" content="noindex">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<style>
+  :root { --vert: #1C3C30; --or: #EFD28E; --creme: #F6F0E1; --encre: #12251E; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; }
+  body {
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 48px 24px;
+    background: var(--vert) url("/assets/motif-or.svg") repeat;
+    background-size: 600px 600px;
+    color: var(--creme);
+    font-family: Montserrat, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 17px; line-height: 1.6; text-align: center;
+  }
+  main {
+    width: 100%; max-width: 640px;
+    display: flex; flex-direction: column; align-items: center; gap: 22px;
+    padding: 40px 28px;
+    background: rgba(28, 60, 48, 0.92);
+    border: 1px solid rgba(239, 210, 142, 0.35);
+    border-radius: 8px;
+  }
+  .logo { width: min(340px, 80%); height: auto; }
+  h1 {
+    margin: 8px 0 0;
+    font-family: "Libre Baskerville", Baskerville, Georgia, serif;
+    font-weight: 400; font-size: clamp(26px, 5vw, 36px); line-height: 1.25;
+    color: var(--or);
+  }
+  p { margin: 0; }
+  .actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 8px; }
+  .btn {
+    display: inline-flex; align-items: center; min-height: 48px; padding: 0 22px;
+    border-radius: 4px; font-weight: 700; font-size: 15px; text-decoration: none;
+  }
+  .btn-or { background: var(--or); color: var(--encre); }
+  .btn-ligne { border: 1.5px solid var(--or); color: var(--or); }
+  .btn:focus-visible { outline: 3px solid var(--creme); outline-offset: 3px; }
+  .infos { font-size: 15px; color: #E4DFD1; }
+  .infos a { color: var(--creme); }
+  footer { margin-top: 28px; font-size: 13px; color: #E4DFD1; }
+</style>
+</head>
+<body>
+<main>
+  <img class="logo" src="/assets/logo-or.svg" alt="Gourmet Distri, au service de la restauration" width="340" height="155">
+  <h1>Notre nouveau site arrive très bientôt.</h1>
+  <p>Fruits et légumes, crèmerie, fromages, épicerie, viande, traiteur, boissons : votre grossiste familial livre les professionnels de la restauration en Essonne et dans le sud de la Seine-et-Marne, du lundi au samedi.</p>
+  <div class="actions">
+    <a class="btn btn-or" href="tel:+33647907021">Appeler le 06 47 90 70 21</a>
+    <a class="btn btn-ligne" href="https://commandes.gourmetdistri.fr">Espace client</a>
+  </div>
+  <p class="infos"><a href="mailto:contact@gourmetdistri.fr">contact@gourmetdistri.fr</a><br>2 rue de l'Avenir, 91350 Grigny<br>Service commercial du lundi au vendredi, de 8 h à 16 h</p>
+</main>
+<footer>© 2026 Gourmet Distri · SARL au capital de 1 500 € · RCS Évry 883 195 018</footer>
+</body>
+</html>

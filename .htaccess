@@ -1,0 +1,26 @@
+# Gourmet Distri - site vitrine (gourmetdistri.fr)
+# Deploye automatiquement par OVH depuis GitHub (Euphorique91/site-vitrine, branche main).
+# Depot PUBLIC : ne jamais y mettre de mot de passe, de cle ou de jeton.
+
+# Ne jamais servir les fichiers internes du depot
+RedirectMatch 404 ^/\.git
+RedirectMatch 404 ^/README\.md$
+
+# ------------------------------------------------------------------
+# QR codes dynamiques
+# Pour changer la page d'arrivee d'un QR code : modifier l'adresse en fin
+# de ligne, puis pousser sur GitHub. Le QR code imprime ne change jamais.
+# 302 = redirection temporaire : les telephones ne la memorisent pas.
+# utm_source = support scanne (pour les statistiques).
+# ------------------------------------------------------------------
+RedirectMatch 302 ^/qr/camion/?$  https://gourmetdistri.fr/?utm_source=camion&utm_medium=qrcode&utm_campaign=qr
+RedirectMatch 302 ^/qr/carte/?$   https://gourmetdistri.fr/?utm_source=carte-de-visite&utm_medium=qrcode&utm_campaign=qr
+RedirectMatch 302 ^/qr/colis/?$   https://gourmetdistri.fr/?utm_source=colis&utm_medium=qrcode&utm_campaign=qr
+
+# Supports a definir : renommer la valeur utm_source le jour ou ils sont attribues
+RedirectMatch 302 ^/qr/s1/?$      https://gourmetdistri.fr/?utm_source=a-definir-1&utm_medium=qrcode&utm_campaign=qr
+RedirectMatch 302 ^/qr/s2/?$      https://gourmetdistri.fr/?utm_source=a-definir-2&utm_medium=qrcode&utm_campaign=qr
+RedirectMatch 302 ^/qr/s3/?$      https://gourmetdistri.fr/?utm_source=a-definir-3&utm_medium=qrcode&utm_campaign=qr
+
+# QR code general (premier modele, sans support precis)
+RedirectMatch 302 ^/qr/?$         https://gourmetdistri.fr/?utm_source=general&utm_medium=qrcode&utm_campaign=qr
