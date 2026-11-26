@@ -11,6 +11,10 @@
  * Envoi authentifié par le serveur SMTP d'OVH (ssl0.ovh.net:465), comme l'appli de commande :
  * les e-mails envoyés par la fonction mail() de l'hébergement sont refusés par Gmail et Yahoo.
  *
+ * Anti-robots : vérification invisible faite par le navigateur (petit calcul, « preuve de travail »), hébergée ici :
+ * ni service tiers, ni cookie, ni image à déchiffrer. Le serveur signe un défi (GET ?defi), le navigateur le résout,
+ * le serveur vérifie la signature, la solution, la date et que le défi n'a pas déjà servi.
+ *
  * Chaque demande est aussi copiée dans /home/gourmetdin/prive/site-vitrine/demandes/
  * (un fichier par mois, effacé au bout de 3 ans) : aucune demande n'est perdue si l'envoi échoue.
  */
@@ -42,7 +46,66 @@ function configEnvoi(string $dossier, string $prive): ?array
     return null;
 }
 
+const DEFI_MAX = 60000;       // le navigateur essaie au plus 60 000 nombres (environ 1 s sur un téléphone)
+const DEFI_DUREE = 1800;      // un défi reste valable 30 minutes
+
+/** Clé secrète des défis : jamais dans le dépôt, dérivée de la configuration privée du serveur. */
+function cleDefi(string $dossier, string $prive): string
+{
+    $smtp = configEnvoi($dossier, $prive);
+    return hash('sha256', 'defi-formulaire|' . ($smtp ? (string) $smtp['password'] : __DIR__));
+}
+
+/** Défi signé : le navigateur doit retrouver le nombre n tel que sha256(sel . n) = defi. */
+function nouveauDefi(string $cle): array
+{
+    $sel = bin2hex(random_bytes(12)) . '.' . (time() + DEFI_DUREE);
+    $n = random_int(0, DEFI_MAX);
+    $defi = hash('sha256', $sel . $n);
+    return ['sel' => $sel, 'defi' => $defi, 'signature' => hash_hmac('sha256', $defi, $cle), 'max' => DEFI_MAX];
+}
+
+/** Vérifie la preuve envoyée avec le formulaire ; chaque défi ne sert qu'une fois. */
+function preuveValide(string $preuve, string $cle, string $dossier): bool
+{
+    $p = json_decode(base64_decode($preuve, true) ?: '', true);
+    if (!is_array($p) || !isset($p['sel'], $p['defi'], $p['signature'], $p['n'])) {
+        return false;
+    }
+    $sel = (string) $p['sel'];
+    $defi = (string) $p['defi'];
+    $expire = (int) substr((string) strrchr($sel, '.'), 1);
+    if ($expire < time() || $expire > time() + DEFI_DUREE + 60) {
+        return false;
+    }
+    if (!hash_equals(hash_hmac('sha256', $defi, $cle), (string) $p['signature'])) {
+        return false;
+    }
+    if (!ctype_digit((string) $p['n']) || (int) $p['n'] > DEFI_MAX || !hash_equals($defi, hash('sha256', $sel . (int) $p['n']))) {
+        return false;
+    }
+    // Anti-rejeu : un défi déjà utilisé est refusé (traces effacées au bout d'un jour)
+    if (is_dir($dossier . '/defis') || @mkdir($dossier . '/defis', 0700, true)) {
+        $f = $dossier . '/defis/' . substr($defi, 0, 40);
+        if (is_file($f)) {
+            return false;
+        }
+        @file_put_contents($f, (string) time());
+        foreach (glob($dossier . '/defis/*') ?: [] as $vieux) {
+            if (@filemtime($vieux) < time() - 86400) {
+                @unlink($vieux);
+            }
+        }
+    }
+    return true;
+}
+
 if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'POST') {
+    if (isset($_GET['defi'])) {
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode(nouveauDefi(cleDefi($dossier, $prive)));
+        exit;
+    }
     // Contrôle sans envoi : https://gourmetdistri.fr/contact.php?verif
     if (isset($_GET['verif'])) {
         header('Content-Type: application/json; charset=utf-8');
@@ -82,6 +145,7 @@ $d = [
 ];
 $piege = champ('site_web', 200);
 $duree = champ('duree', 10);
+$preuve = isset($_POST['preuve']) && is_string($_POST['preuve']) ? substr($_POST['preuve'], 0, 2000) : '';
 
 function repondre(bool $ok, string $message, bool $json): void
 {
@@ -112,6 +176,12 @@ if ($piege !== '' || ($duree !== '' && ctype_digit($duree) && (int) $duree < 3))
     repondre(true, '', $json);
 }
 
+// Vérification invisible : sans preuve valable, la demande ne part pas (robots qui écrivent directement au serveur)
+if (!preuveValide($preuve, cleDefi($dossier, $prive), $dossier)) {
+    error_log('[Site vitrine] Demande refusée : vérification anti-robot absente ou incorrecte');
+    repondre(false, "La vérification automatique n'a pas abouti. Rechargez la page et réessayez ; si le problème continue, appelez-nous au " . TELEPHONE . '.', $json);
+}
+
 /* ------------------------------------------------------------------ contrôles */
 $manque = [];
 foreach (['nom' => 'nom et prénom', 'etablissement' => 'établissement', 'telephone' => 'téléphone', 'email' => 'e-mail', 'type' => "type d'établissement", 'ville' => 'code postal et ville'] as $k => $libelle) {
@@ -131,9 +201,11 @@ if (strlen(preg_replace('/\D/', '', $d['telephone']) ?? '') < 9) {
 if (!in_array($d['type'], TYPES, true)) {
     $d['type'] = 'Autre';
 }
-if (preg_match_all('#https?://|www\.#i', $d['besoins']) > 2) {
-    repondre(true, '', $json); // message publicitaire
+$liens = preg_match_all('#https?://|www\.|\.(?:com|net|org|io|xyz|ru|top|info)\b#i', $d['besoins'] . ' ' . $d['etablissement'] . ' ' . $d['nom']);
+if ($liens >= 2) {
+    repondre(true, '', $json); // message publicitaire ou arnaque : rien n'est envoyé
 }
+$aVerifier = $liens === 1;
 
 /* ------------------------------------------------------------------ configuration privée */
 $smtp = configEnvoi($dossier, $prive);
@@ -300,7 +372,7 @@ foreach (['Nom et prénom' => 'nom', 'Établissement' => 'etablissement', 'Type'
 $texte1 .= 'Origine : ' . $origine . "\n\nRépondre à cet e-mail écrit directement au prospect.\n";
 $html1 = enveloppe('Nouvelle demande de rappel', '<p style="margin:0 0 16px">Un prospect demande à être rappelé par le service commercial.</p>' . tableau($lignes)
     . '<p style="margin:18px 0 0;font-size:13px;color:#4A5A51">Répondre à cet e-mail écrit directement au prospect.</p>');
-$ok1 = envoyer($smtp, DESTINATAIRE, 'Demande de rappel : ' . $d['etablissement'] . ' (' . $d['ville'] . ')', $texte1, $html1, 'Site gourmetdistri.fr', $d['email']);
+$ok1 = envoyer($smtp, DESTINATAIRE, ($aVerifier ? '[À vérifier : contient un lien] ' : '') . 'Demande de rappel : ' . $d['etablissement'] . ' (' . $d['ville'] . ')', $texte1, $html1, 'Site gourmetdistri.fr', $d['email']);
 
 if (!$ok1) {
     repondre(false, "L'envoi n'a pas abouti pour une raison technique. Votre demande a été notée ; pour aller plus vite, appelez-nous au " . TELEPHONE . '.', $json);

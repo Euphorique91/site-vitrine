@@ -474,11 +474,50 @@ Array.prototype.forEach.call(document.querySelectorAll('.m-panneau a'),function(
     document.getElementById('v-jeton').value = String(Math.round((Date.now() - debut) / 1000));
   });
   if (!window.fetch || !window.FormData) return; // envoi classique sans script
+
+  // Vérification invisible « je ne suis pas un robot » : le navigateur résout un petit calcul envoyé par
+  // notre serveur (aucun service extérieur, aucun cookie). Il démarre dès qu'on commence à remplir le formulaire.
+  var preuve = null;
+  function hex(buf) {
+    var a = new Uint8Array(buf), s = '';
+    for (var i = 0; i < a.length; i++) s += ('0' + a[i].toString(16)).slice(-2);
+    return s;
+  }
+  function resoudre() {
+    if (!(window.crypto && crypto.subtle && window.TextEncoder)) return Promise.resolve('');
+    var enc = new TextEncoder();
+    return fetch('/contact.php?defi', { cache: 'no-store' })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        var n = 0;
+        function lot() {
+          var essais = [];
+          for (var i = 0; i < 400 && n + i <= d.max; i++) essais.push(crypto.subtle.digest('SHA-256', enc.encode(d.sel + (n + i))));
+          return Promise.all(essais).then(function (h) {
+            for (var j = 0; j < h.length; j++) {
+              if (hex(h[j]) === d.defi) return btoa(JSON.stringify({ sel: d.sel, defi: d.defi, signature: d.signature, n: n + j }));
+            }
+            n += h.length;
+            return n > d.max ? '' : lot();
+          });
+        }
+        return lot();
+      })
+      .catch(function () { return ''; });
+  }
+  function preparer() { if (!preuve) preuve = resoudre(); return preuve; }
+  form.addEventListener('focusin', preparer);
+
   form.addEventListener('submit', function (ev) {
     ev.preventDefault();
     bouton.disabled = true;
     etat.textContent = 'Envoi en cours…';
-    fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
+    preparer().then(function (p) {
+      preuve = null; // un défi ne sert qu'une fois : le prochain envoi en demandera un nouveau
+      var donnees = new FormData(form);
+      donnees.set('preuve', p);
+      return fetch(form.action, { method: 'POST', body: donnees, headers: { 'Accept': 'application/json' } });
+    })
       .then(function (r) { return r.json().catch(function () { return { ok: false }; }); })
       .then(function (res) {
         if (res && res.ok) {
