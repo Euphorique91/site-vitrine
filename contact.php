@@ -152,6 +152,12 @@ if (is_dir($dossier . '/limites') || @mkdir($dossier . '/limites', 0700, true)) 
     }
     $traces[] = $maintenant;
     @file_put_contents($f, implode(',', $traces), LOCK_EX);
+    // Rien ne traîne : les traces de plus d'un jour sont effacées
+    foreach (glob($dossier . '/limites/*.txt') ?: [] as $vieux) {
+        if (@filemtime($vieux) < $maintenant - 86400) {
+            @unlink($vieux);
+        }
+    }
 }
 
 /* ------------------------------------------------------------------ copie de sécurité */

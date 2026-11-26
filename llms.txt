@@ -1,6 +1,10 @@
 # Gourmet Distri
 
-> Grossiste alimentaire familial basé à Grigny (Essonne, 91), fondé en 2020 par deux frères, Adrien et Romain Lemaitre. Livraison gratuite, sans minimum de commande, chaque matin du lundi au samedi, des professionnels de la restauration de l'Essonne (91) et du sud de la Seine-et-Marne (77).
+> Grossiste alimentaire familial basé en Essonne (91), fournisseur des professionnels de la restauration, fondé en 2020 par deux frères, Adrien et Romain Lemaitre. Livraison gratuite, sans minimum de commande, chaque matin du lundi au samedi, des professionnels de la restauration de l'Essonne (91), du sud de la Seine-et-Marne (77) et jusqu'à Rungis. Commande en ligne sur l'application Gourmet Distri.
+
+## Zone de livraison
+
+Essonne (91), sud de la Seine-et-Marne (77) et jusqu'à Rungis (94) : notamment Rungis, Fleury-Mérogis, Sénart, Melun, Fontainebleau et ses alentours, Nemours.
 
 ## Contact
 
@@ -8,7 +12,7 @@
 - E-mail : contact@gourmetdistri.fr
 - Adresse : 2 rue de l'Avenir, 91350 Grigny, France
 - Demande de rappel en ligne : https://gourmetdistri.fr/#contact
-- Espace client (commande en ligne pour les clients) : https://commandes.gourmetdistri.fr
+- Application de commande pour les clients (téléphone et ordinateur : prix du client, favoris, historique, suivi de la livraison du jour) : https://commandes.gourmetdistri.fr
 
 ## Clients livrés
 
@@ -29,7 +33,7 @@ Restaurants, brasseries, traiteurs, boulangeries, hôtels, restauration collecti
 ## Fonctionnement
 
 - Tarifs établis avec le commercial selon les besoins de l'établissement (pas de prix publics).
-- Commande en ligne depuis l'espace client jusqu'à minuit pour une livraison le lendemain matin.
+- Commande sur l'application jusqu'à minuit pour une livraison le lendemain matin.
 - Règlement par prélèvement automatique, facturation regroupée.
 - Travail avec des producteurs locaux.
 
@@ -39,13 +43,17 @@ Restaurants, brasseries, traiteurs, boulangeries, hôtels, restauration collecti
 
 Fruits et légumes frais, produits laitiers et œufs, fromages, produits d'épicerie salée et sucrée, spécialités traiteur, fruits et légumes de 4e gamme et consommables : tout ce dont une cuisine professionnelle a besoin, chez un seul grossiste.
 
+### Pourquoi choisir Gourmet Distri comme fournisseur ?
+
+Parce que nous sommes une entreprise familiale à taille humaine : un interlocuteur qui connaît votre établissement, des produits choisis avec soin, dont une partie auprès de producteurs locaux, la livraison gratuite et sans minimum chaque matin du lundi au samedi, et une application pour commander jusqu'à minuit. Un seul fournisseur pour l'essentiel de votre cuisine.
+
 ### Quels établissements livrez-vous ?
 
 Restaurants, brasseries, traiteurs, boulangeries, hôtels, restauration collective et commerces de bouche. Chaque cuisine est différente : nous adaptons notre offre à la vôtre.
 
 ### Où livrez-vous ?
 
-Basés à Grigny (91), nous livrons aujourd'hui l'Essonne et le sud de la Seine-et-Marne (77). Vous êtes installé ailleurs ? Contactez notre service commercial pour en parler.
+Depuis l'Essonne (91), nos camions livrent chaque matin l'Essonne, le sud de la Seine-et-Marne (77) et jusqu'à Rungis : Fleury-Mérogis, Rungis, Sénart, Melun, Fontainebleau et ses alentours, Nemours… Vous êtes installé ailleurs ? Contactez notre service commercial pour en parler.
 
 ### Quand suis-je livré ?
 
@@ -65,7 +73,7 @@ Remplissez le formulaire de contact ou appelez le 06 47 90 70 21 : un commercial
 
 ### Comment passer commande ?
 
-Une fois votre compte ouvert, vous commandez en ligne depuis votre espace client, jusqu'à minuit pour une livraison le lendemain matin.
+Une fois votre compte ouvert, vous commandez sur notre application, depuis votre téléphone ou votre ordinateur, jusqu'à minuit pour une livraison le lendemain matin. Vous y retrouvez vos prix, vos produits favoris et l'historique de vos commandes, et vous suivez votre livraison du jour.
 
 ### Pourquoi les prix ne sont-ils pas affichés ?
 
