@@ -14,7 +14,7 @@
 <meta property="og:locale" content="fr_FR">
 <meta property="og:site_name" content="Gourmet Distri">
 <meta property="og:url" content="https://gourmetdistri.fr/">
-<meta property="og:title" content="Gourmet Distri · Votre grossiste alimentaire familial, au service de votre cuisine">
+<meta property="og:title" content="Gourmet Distri · Grossiste alimentaire, au service de votre cuisine">
 <meta property="og:description" content="Grossiste alimentaire familial en Essonne (91), fournisseur des restaurants : fruits et légumes, produits laitiers, fromages, épicerie, traiteur. Livraison gratuite chaque matin, de Rungis à Melun et Nemours.">
 <meta property="og:image" content="https://gourmetdistri.fr/assets/partage.jpg">
 <meta property="og:image:width" content="1200">
@@ -36,7 +36,7 @@ html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{margin:0;background:#12251E}
 a{color:#1C3C30}a:hover{color:#12251E}
-.hero-motif{background-image:url(/assets/motif-haut.svg);background-position:center top;background-size:3840px auto;background-repeat:no-repeat}
+.hero-motif{background-image:url(/assets/motif-haut-v2.svg);background-position:center top;background-size:3840px auto;background-repeat:no-repeat}
 .bandeaux-or{background-color:#1C3C30;isolation:isolate;clip-path:inset(0)}
 .bandeaux-or::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:url(/assets/fond-or.svg);background-size:1100px 1100px;background-repeat:repeat;background-position:center top}
 .bandeaux-vert{background-color:#F6F0E1;isolation:isolate;clip-path:inset(0)}
@@ -54,6 +54,13 @@ input:focus,select:focus,textarea:focus{outline:2px solid #1C3C30;outline-offset
 button[disabled]{opacity:.65;cursor:wait!important}
 .btn{text-align:center}
 .voir-plus{display:none}
+.wa-flottant{position:fixed;right:18px;bottom:18px;z-index:20;display:inline-flex;align-items:center;gap:9px;min-height:50px;padding:0 20px 0 16px;border:1px solid rgba(239,210,142,.65);border-radius:999px;background:#1C3C30;color:#EFD28E;font:600 12px Montserrat,system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;box-shadow:0 8px 24px rgba(18,37,30,.35)}
+.wa-flottant:hover{background:#12251E;color:#EFD28E}
+.js .wa-flottant{visibility:hidden;opacity:0;transform:translateY(10px);transition:opacity .25s,transform .25s,visibility 0s .25s}
+.js .wa-flottant.visible{visibility:visible;opacity:1;transform:none;transition:opacity .25s,transform .25s}
+@media (prefers-reduced-motion:reduce){.wa-flottant{transition:none!important}}
+@media (max-width:560px){.wa-flottant{width:54px;height:54px;min-height:0;padding:0;justify-content:center;right:14px;bottom:14px}.wa-flottant span{display:none}.wa-flottant svg{width:24px;height:24px}}
+@media print{.wa-flottant{display:none}}
 .form-ok{display:flex;flex-direction:column;gap:14px;text-align:left}
 @media (max-width:1100px){.liv-sep{border-left:0!important}}
 @media (max-width:760px){
@@ -88,6 +95,35 @@ summary{font-size:18px!important;min-height:68px!important}
 }
 @media (max-width:560px){.liv>div:not(:first-child){border-top:1px solid rgba(239,210,142,0.25);padding-top:24px!important}}
 
+
+.m-logo,.m-menu,.m-espace,.chapeau-court,.m-barre,.m-etal{display:none}
+.m-panneau{display:contents}
+@media (max-width:760px){
+.entete{flex-wrap:nowrap!important;justify-content:space-between!important;align-items:center!important;padding:14px 18px!important;gap:12px!important}
+.m-menu{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 14px;border:1px solid rgba(239,210,142,.6);border-radius:3px;background:transparent;color:#EFD28E;font:600 12px Montserrat,system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;margin-left:auto}
+.m-panneau{display:none;position:absolute;top:100%;left:0;right:0;width:100%;box-sizing:border-box;z-index:30;flex-direction:column;gap:18px;padding:6px 20px 26px;background:#1C3C30;border-bottom:1px solid rgba(239,210,142,.35);box-shadow:0 18px 30px rgba(0,0,0,.25)}
+.entete.ouvert .m-panneau{display:flex}
+.m-panneau nav{flex-direction:column;gap:0!important;font-size:13px!important}
+.m-panneau nav a{display:block;flex:none!important;padding:15px 0!important;border-bottom:1px solid rgba(239,210,142,.2)}
+.m-panneau>div{flex-direction:column}
+.m-panneau>div>.btn{flex:none!important;width:100%;max-width:100%;box-sizing:border-box;justify-content:center!important;min-height:50px!important}
+.m-panneau nav,.m-panneau>div{width:100%}
+.chapeau{display:none}
+.chapeau-court{display:block;margin:0;max-width:30ch;font-size:17px;line-height:1.6;color:#E4DFD1}
+}
+
+@media (max-width:760px){
+.entete{justify-content:space-between!important}
+.m-espace{display:inline-flex;align-items:center;min-height:44px}
+.h-actions>a:not(.btn){display:none}
+.hero-in{padding:30px 24px 0!important;gap:26px!important;min-height:calc(100svh - 72px);justify-content:center}
+.hero-in>a:first-child{width:240px!important}
+.surtitre{display:none}
+.chapeau-court{display:none}
+.hero-in h1{font-size:31px!important;line-height:1.22!important}
+.h-actions{flex-direction:column;gap:18px!important;margin-top:6px!important}
+.m-etal{display:block;align-self:stretch;height:90px;margin:18px -24px 0;background:url(/assets/etal-mobile.svg) center bottom/390px auto no-repeat;opacity:.9}
+}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WholesaleStore","@id":"https://gourmetdistri.fr/#entreprise","name":"Gourmet Distri","legalName":"Gourmet Distri SARL","alternateName":"Gourmet Distri, grossiste alimentaire pour la restauration","slogan":"Au service de la restauration","description":"Grossiste alimentaire familial basé en Essonne (91), fournisseur des professionnels de la restauration, fondé en 2020 par deux frères, Adrien et Romain. Fruits et légumes frais, produits laitiers et œufs, fromages, produits d'épicerie salée et sucrée, spécialités traiteur, fruits et légumes de 4e gamme et consommables, livrés gratuitement et sans minimum de commande chaque matin, du lundi au samedi, aux restaurants, brasseries, traiteurs, boulangeries, hôtels, restauration collective et commerces de bouche de l'Essonne, du sud de la Seine-et-Marne et jusqu'à Rungis (Fleury-Mérogis, Sénart, Melun, Fontainebleau, Nemours). Commande en ligne sur l'application Gourmet Distri, jusqu'à minuit pour le lendemain.","url":"https://gourmetdistri.fr/","logo":{"@type":"ImageObject","url":"https://gourmetdistri.fr/assets/logo-512.png","width":512,"height":512},"image":"https://gourmetdistri.fr/assets/partage.jpg","telephone":"+33647907021","email":"contact@gourmetdistri.fr","address":{"@type":"PostalAddress","streetAddress":"2 rue de l'Avenir","postalCode":"91350","addressLocality":"Grigny","addressRegion":"Île-de-France","addressCountry":"FR"},"hasMap":"https://www.google.com/maps/search/?api=1&query=Gourmet%20Distri%202%20rue%20de%20l%27Avenir%2091350%20Grigny","areaServed":[{"@type":"AdministrativeArea","name":"Essonne (91)"},{"@type":"AdministrativeArea","name":"Seine-et-Marne (77), sud du département"},{"@type":"City","name":"Rungis"},{"@type":"City","name":"Fleury-Mérogis"},{"@type":"City","name":"Sénart"},{"@type":"City","name":"Melun"},{"@type":"City","name":"Fontainebleau"},{"@type":"City","name":"Nemours"}],"foundingDate":"2020-04","founder":[{"@type":"Person","name":"Adrien Lemaitre","jobTitle":"Cofondateur et gérant"},{"@type":"Person","name":"Romain Lemaitre","jobTitle":"Cofondateur et cogérant"}],"vatID":"FR93883195018","taxID":"88319501800022","identifier":[{"@type":"PropertyValue","propertyID":"SIREN","value":"883195018"},{"@type":"PropertyValue","propertyID":"SIRET","value":"88319501800022"}],"naics":"424410","isicV4":"4630","openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"08:00","closes":"16:00"}],"contactPoint":[{"@type":"ContactPoint","contactType":"sales","name":"Service commercial","telephone":"+33647907021","email":"contact@gourmetdistri.fr","areaServed":"FR","availableLanguage":"French","hoursAvailable":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"08:00","closes":"16:00"}}],"paymentAccepted":"Prélèvement automatique, facturation regroupée","currenciesAccepted":"EUR","knowsAbout":["Grossiste alimentaire","Fournisseur de restaurants","Fruits et légumes frais","Produits laitiers","Fromages","Produits d'épicerie","Spécialités traiteur","Fruits et légumes 4e gamme","Consommables pour la restauration","Producteurs locaux","Livraison aux professionnels de la restauration","Fournisseur pour restaurants","Application de commande en ligne pour les professionnels"],"audience":{"@type":"BusinessAudience","audienceType":"Restaurants, brasseries, traiteurs, boulangeries, hôtels, restauration collective, commerces de bouche"},"hasOfferCatalog":{"@type":"OfferCatalog","name":"Nos rayons","itemListElement":[{"@type":"OfferCatalog","name":"Fruits","description":"Agrumes, fruits exotiques, fruits à coque et marrons, fruits à noyau, fruits rouges, pastèques et melons, poires, pommes, raisins, tomates."},{"@type":"OfferCatalog","name":"Légumes","description":"Ail et oignons, aromates, champignons, choux, courges, légumes exotiques, fleurs comestibles, légumes verts, micro-pousses, mini-légumes, pommes de terre, légumes racines, légumes pour ratatouille, salades."},{"@type":"OfferCatalog","name":"Produits laitiers et œufs","description":"Beurres, crèmes, crèmes sucrées, fromages blancs, laits, œufs cuits, entiers et liquides, yaourts."},{"@type":"OfferCatalog","name":"Fromages","description":"Bries, camemberts et coulommiers, cantals, comtés et emmentals, fromages anglais, grecs, hollandais et italiens, fromages de brebis et de chèvre, fromages de Savoie, des montagnes et des plaines, mozzarellas et burratas, roqueforts et bleus, fromages frais à tartiner."},{"@type":"OfferCatalog","name":"Produits d'épicerie salée","description":"Aides culinaires, conserves salées, épices, huiles, légumes secs et riz, pains et brioches, pâtes sèches, produits apéritifs, sels et vinaigres, sauces, sauces individuelles et en flacon souple."},{"@type":"OfferCatalog","name":"Produits d'épicerie sucrée","description":"Aides à la pâtisserie, conserves, sauces, miels et confitures, farines et sucres, fruits secs, purées et coulis de fruits."},{"@type":"OfferCatalog","name":"Spécialités traiteur","description":"Antipasti, légumes cuisinés, pâtes fraîches, pâtes et levures, produits de la mer."},{"@type":"OfferCatalog","name":"Fruits et légumes 4e gamme","description":"Fruits, légumes et salades de fruits prêts à l'emploi : lavés, épluchés, coupés."},{"@type":"OfferCatalog","name":"Consommables","description":"Boîtes à emporter, produits d'entretien."}]}},{"@type":"WebSite","@id":"https://gourmetdistri.fr/#site","url":"https://gourmetdistri.fr/","name":"Gourmet Distri","inLanguage":"fr-FR","publisher":{"@id":"https://gourmetdistri.fr/#entreprise"}},{"@type":"WebPage","@id":"https://gourmetdistri.fr/#page","url":"https://gourmetdistri.fr/","name":"Grossiste alimentaire et fournisseur des restaurants en Essonne (91) et Seine-et-Marne (77) · Gourmet Distri","isPartOf":{"@id":"https://gourmetdistri.fr/#site"},"about":{"@id":"https://gourmetdistri.fr/#entreprise"},"inLanguage":"fr-FR","primaryImageOfPage":"https://gourmetdistri.fr/assets/partage.jpg"},{"@type":"FAQPage","@id":"https://gourmetdistri.fr/#faq","inLanguage":"fr-FR","mainEntity":[{"@type":"Question","name":"Quels produits proposez-vous ?","acceptedAnswer":{"@type":"Answer","text":"Fruits et légumes frais, produits laitiers et œufs, fromages, produits d'épicerie salée et sucrée, spécialités traiteur, fruits et légumes de 4e gamme et consommables : tout ce dont une cuisine professionnelle a besoin, chez un seul grossiste."}},{"@type":"Question","name":"Pourquoi choisir Gourmet Distri comme fournisseur ?","acceptedAnswer":{"@type":"Answer","text":"Parce que nous sommes une entreprise familiale à taille humaine : un interlocuteur qui connaît votre établissement, des produits choisis avec soin, dont une partie auprès de producteurs locaux, la livraison gratuite et sans minimum chaque matin du lundi au samedi, et une application pour commander jusqu'à minuit. Un seul fournisseur pour l'essentiel de votre cuisine."}},{"@type":"Question","name":"Quels établissements livrez-vous ?","acceptedAnswer":{"@type":"Answer","text":"Restaurants, brasseries, traiteurs, boulangeries, hôtels, restauration collective et commerces de bouche. Chaque cuisine est différente : nous adaptons notre offre à la vôtre."}},{"@type":"Question","name":"Où livrez-vous ?","acceptedAnswer":{"@type":"Answer","text":"Depuis l'Essonne (91), nos camions livrent chaque matin l'Essonne, le sud de la Seine-et-Marne (77) et jusqu'à Rungis : Fleury-Mérogis, Rungis, Sénart, Melun, Fontainebleau et ses alentours, Nemours… Vous êtes installé ailleurs ? Contactez notre service commercial pour en parler."}},{"@type":"Question","name":"Quand suis-je livré ?","acceptedAnswer":{"@type":"Answer","text":"Du lundi au samedi, le matin. Toute commande passée la veille, jusqu'à minuit, vous est livrée le lendemain matin."}},{"@type":"Question","name":"Y a-t-il un minimum de commande ?","acceptedAnswer":{"@type":"Answer","text":"Non. La livraison est gratuite, sans minimum de commande."}},{"@type":"Question","name":"Travaillez-vous avec des producteurs locaux ?","acceptedAnswer":{"@type":"Answer","text":"Oui. Nous travaillons main dans la main avec des producteurs locaux et sélectionnons chaque référence avec exigence."}},{"@type":"Question","name":"Comment devenir client ?","acceptedAnswer":{"@type":"Answer","text":"Remplissez le formulaire de contact ou appelez le 06 47 90 70 21 : un commercial vous rappelle pour faire le point sur vos besoins et ouvrir votre compte."}},{"@type":"Question","name":"Comment passer commande ?","acceptedAnswer":{"@type":"Answer","text":"Une fois votre compte ouvert, vous commandez sur notre application, depuis votre téléphone ou votre ordinateur, jusqu'à minuit pour une livraison le lendemain matin. Vous y retrouvez vos prix, vos produits favoris et l'historique de vos commandes, et vous suivez votre livraison du jour."}},{"@type":"Question","name":"Pourquoi les prix ne sont-ils pas affichés ?","acceptedAnswer":{"@type":"Answer","text":"Nos tarifs sont établis avec votre commercial, selon les besoins de votre établissement."}},{"@type":"Question","name":"Comment se passe le règlement ?","acceptedAnswer":{"@type":"Answer","text":"Par prélèvement automatique, avec une facturation regroupée : rien à régler à la livraison, une gestion simplifiée pour vous."}}]}]}</script>
 </head>
@@ -97,6 +133,9 @@ summary{font-size:18px!important;min-height:68px!important}
 
 <header style="background: #1C3C30; color: #F6F0E1;">
 <div class="entete" style="position: relative; box-sizing: border-box; max-width: 1240px; margin: 0 auto; padding: 26px 32px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px; min-height: 44px;">
+<a class="m-espace" href="https://commandes.gourmetdistri.fr" style="color:#EFD28E;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;text-decoration:none">Déjà client ↗</a>
+<button type="button" class="m-menu" aria-expanded="false" aria-controls="m-panneau">Menu <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button>
+<div id="m-panneau" class="m-panneau">
 <nav aria-label="Navigation principale" style="display: flex; flex-wrap: wrap; gap: 8px 30px; font-size: 12px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;">
 <a href="#rayons" style="color: #EFD28E; text-decoration: none;">Nos rayons</a>
 <a href="#qui-sommes-nous" style="color: #EFD28E; text-decoration: none;">Qui sommes-nous</a>
@@ -109,6 +148,7 @@ summary{font-size:18px!important;min-height:68px!important}
 <a class="btn" href="#contact" style="display: inline-flex; align-items: center; min-height: 44px; box-sizing: border-box; padding: 0 20px; border-radius: 3px; background: #EFD28E; color: #12251E; text-decoration: none; font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;">Contacter un commercial</a>
 </div>
 </div>
+</div>
 </header>
 
 <main id="contenu">
@@ -116,12 +156,14 @@ summary{font-size:18px!important;min-height:68px!important}
 <section class="hero-in" style="position: relative; box-sizing: border-box; max-width: 1240px; margin: 0 auto; padding: 40px 32px 150px; display: flex; flex-direction: column; align-items: center; gap: 26px; text-align: center;">
 <a href="/" style="display: block; width: clamp(240px, 26vw, 380px);"><img src="/assets/logo-or.svg" alt="Gourmet Distri, grossiste alimentaire au service de la restauration" width="380" height="173" fetchpriority="high" style="display: block; width: 100%; height: auto;"></a>
 <p class="surtitre" style="margin: 20px 0 0; font-size: 13px; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: #EFD28E;">Fournisseur des restaurants · Essonne et sud Seine-et-Marne</p>
-<h1 style="margin: 0; max-width: 900px; font-family: 'Libre Baskerville', Georgia, serif; font-weight: 400; font-size: clamp(30px, 3.5vw, 50px); line-height: 1.2; letter-spacing: -0.01em; color: #F6F0E1; text-wrap: balance;">Votre grossiste alimentaire familial,<br>au service de votre cuisine.</h1>
+<h1 style="margin: 0; max-width: 900px; font-family: 'Libre Baskerville', Georgia, serif; font-weight: 400; font-size: clamp(30px, 3.5vw, 50px); line-height: 1.2; letter-spacing: -0.01em; color: #F6F0E1; text-wrap: balance;">Grossiste alimentaire,<br>au service de votre cuisine.</h1>
 <p class="chapeau" style="margin: 0; max-width: 660px; font-size: 19px; color: #F6F0E1;">Depuis 2020, Adrien et Romain livrent chaque matin restaurants, brasseries, traiteurs, boulangeries et cantines : fruits et légumes frais, produits laitiers, fromages, produits d'épicerie et spécialités traiteur. Notre service commercial vous prépare une offre adaptée à votre établissement.</p>
-<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 16px 28px; margin-top: 8px;">
+<p class="chapeau-court">Depuis 2020, Adrien et Romain livrent chaque matin les professionnels de la restauration.</p>
+<div class="h-actions" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 16px 28px; margin-top: 8px;">
 <a class="btn" href="#contact" style="display: inline-flex; align-items: center; min-height: 56px; box-sizing: border-box; padding: 0 30px; border-radius: 3px; background: #EFD28E; color: #12251E; text-decoration: none; font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;">Être rappelé par un commercial</a>
 <a href="https://commandes.gourmetdistri.fr" style="color: #F6F0E1; font-size: 16px; font-weight: 500; text-underline-offset: 5px;">Déjà client ? Commander en ligne</a>
 </div>
+<div class="m-etal" aria-hidden="true"></div>
 </section>
 </div>
 
@@ -183,7 +225,7 @@ summary{font-size:18px!important;min-height:68px!important}
 <h2 style="margin: 0; max-width: 860px; font-family: 'Libre Baskerville', Georgia, serif; font-weight: 400; font-size: clamp(34px, 3.8vw, 52px); line-height: 1.16; color: #EFD28E; text-wrap: balance;">Adrien et Romain, deux frères au service de votre cuisine</h2>
 <div aria-hidden="true" style="display: flex; align-items: center; justify-content: center; gap: 14px;"><span style="width: 64px; height: 1px; background: #EFD28E;"></span><span style="width: 7px; height: 7px; transform: rotate(45deg); border: 1px solid #EFD28E;"></span><span style="width: 64px; height: 1px; background: #EFD28E;"></span></div>
 </div>
-<p style="margin: 0 auto; max-width: 800px; text-align: center; font-family: 'Libre Baskerville', Georgia, serif; font-size: clamp(19px, 1.6vw, 23px); line-height: 1.65; color: #F6F0E1;">Gourmet Distri, c'est d'abord une histoire de famille. En 2020, deux frères, Adrien et Romain, se lancent ensemble dans l'aventure et fondent leur entreprise avec une idée simple : offrir aux restaurateurs un fournisseur qui les écoute vraiment et qui sait s'adapter.</p>
+<p style="margin: 0 auto; max-width: 800px; text-align: center; font-family: 'Libre Baskerville', Georgia, serif; font-size: clamp(19px, 1.6vw, 23px); line-height: 1.65; color: #F6F0E1;">Gourmet Distri, c'est d'abord une histoire de famille. En 2020, deux frères, Adrien et Romain, se lancent ensemble dans l'aventure et fondent leur entreprise avec une idée simple : offrir aux restaurateurs bien plus qu'un fournisseur, un partenaire à l'écoute de chaque cuisine.</p>
 <div id="histoire-suite" style="display: contents;">
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 28px 64px; width: 100%; max-width: 900px; margin: 0 auto; line-height: 1.75; color: #E4DFD1;">
 <p style="margin: 0;">Notre conviction est simple : un bon plat commence par de bons produits. C'est pourquoi nous travaillons main dans la main avec des producteurs locaux et choisissons avec soin chaque référence de nos rayons : fruits et légumes, produits laitiers, fromages, produits d'épicerie, spécialités traiteur…</p>
@@ -287,7 +329,7 @@ summary{font-size:18px!important;min-height:68px!important}
 <p style="margin: 0 0 28px; max-width: 720px; font-size: 16px; line-height: 1.75; color: #E4DFD1;">Par prélèvement automatique, avec une facturation regroupée : rien à régler à la livraison, une gestion simplifiée pour vous.</p>
 </details>
 </div>
-<p style="margin: 0; text-align: center; color: #E4DFD1;">Une autre question ? Notre service commercial vous répond au <a href="tel:+33647907021" style="color: #EFD28E; font-weight: 600; text-underline-offset: 4px;">06 47 90 70 21</a>, du lundi au vendredi de 8 h à 16 h.</p>
+<p style="margin: 0; text-align: center; color: #E4DFD1;">Une autre question ? Notre service commercial vous répond au <a href="tel:+33647907021" style="color: #EFD28E; font-weight: 600; text-underline-offset: 4px;">06 47 90 70 21</a> ou sur <a href="https://wa.me/33647907021?text=Bonjour%2C%20je%20souhaite%20des%20informations%20pour%20mon%20%C3%A9tablissement." target="_blank" rel="noopener" style="color: #EFD28E; font-weight: 600; text-underline-offset: 4px;">WhatsApp</a>, du lundi au vendredi de 8 h à 16 h.</p>
 </div>
 </section>
 
@@ -302,6 +344,7 @@ summary{font-size:18px!important;min-height:68px!important}
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr)); gap: 48px 72px; align-items: center;">
 <div style="display: flex; flex-direction: column;">
 <div style="display: flex; align-items: center; gap: 16px; padding: 18px 0; border-top: 1px solid rgba(28,60,48,0.25); color: #2E4A3F;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1C3C30" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none;"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"></path></svg><a href="tel:+33647907021" style="font-family: 'Libre Baskerville', Georgia, serif; font-size: 26px; color: #1C3C30; text-decoration: none;">06 47 90 70 21</a></div>
+<div style="display: flex; align-items: center; gap: 6px 16px; flex-wrap: wrap; padding: 18px 0; border-top: 1px solid rgba(28,60,48,0.25); color: #2E4A3F;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1C3C30" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none;"><path d="M20 11.5a8 8 0 0 1-11.6 7.1L4 20l1.4-4.2A8 8 0 1 1 20 11.5z"></path><path d="M8.5 10h7M8.5 13.5h4.5"></path></svg><a href="https://wa.me/33647907021?text=Bonjour%2C%20je%20souhaite%20des%20informations%20pour%20mon%20%C3%A9tablissement." target="_blank" rel="noopener" style="font-size: 17px; font-weight: 500; color: #1C3C30; text-decoration: none;">Écrire sur WhatsApp</a><span style="font-size: 14px; color: #4A5A51;">réponse aux heures du service commercial</span></div>
 <div style="display: flex; align-items: center; gap: 16px; padding: 18px 0; border-top: 1px solid rgba(28,60,48,0.25); color: #2E4A3F;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1C3C30" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none;"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg><a href="mailto:contact@gourmetdistri.fr" style="font-size: 17px; font-weight: 500; color: #1C3C30; text-decoration: none;">contact@gourmetdistri.fr</a></div>
 <div style="display: flex; align-items: center; gap: 16px; padding: 18px 0; border-top: 1px solid rgba(28,60,48,0.25); color: #2E4A3F;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1C3C30" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none;"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg><span>Du lundi au vendredi, de 8 h à 16 h</span></div>
 
@@ -352,6 +395,7 @@ summary{font-size:18px!important;min-height:68px!important}
 <p style="margin: 0;">Gourmet Distri<br>2 rue de l'Avenir<br>91350 Grigny</p>
 <a href="tel:+33647907021" style="color: #E4DFD1; text-decoration: none;">06 47 90 70 21</a>
 <a href="mailto:contact@gourmetdistri.fr" style="color: #E4DFD1; text-decoration: none;">contact@gourmetdistri.fr</a>
+<a href="https://wa.me/33647907021?text=Bonjour%2C%20je%20souhaite%20des%20informations%20pour%20mon%20%C3%A9tablissement." target="_blank" rel="noopener" style="color: #E4DFD1; text-decoration: none;">WhatsApp</a>
 </div>
 <div style="display: flex; flex-direction: column; gap: 8px;">
 <p style="margin: 0 0 4px; font-size: 12px; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; color: #EFD28E;">Service commercial</p>
@@ -370,7 +414,14 @@ summary{font-size:18px!important;min-height:68px!important}
 <div style="box-sizing: border-box; max-width: 1240px; margin: 0 auto; padding: 20px 32px 36px; border-top: 1px solid rgba(239,210,142,0.2); font-size: 13px; color: #C9C4B6; text-align: center;">© 2026 Gourmet Distri · SARL au capital de 1 500 € · RCS Évry 883 195 018</div>
 </footer>
 </div>
+<a class="wa-flottant" href="https://wa.me/33647907021?text=Bonjour%2C%20je%20souhaite%20des%20informations%20pour%20mon%20%C3%A9tablissement." target="_blank" rel="noopener" aria-label="Nous écrire sur WhatsApp"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-11.6 7.1L4 20l1.4-4.2A8 8 0 1 1 20 11.5z"></path><path d="M8.5 10h7M8.5 13.5h4.5"></path></svg><span>WhatsApp</span></a>
+
 <script>
+
+(function(){var e=document.querySelector('.entete'),b=document.querySelector('.m-menu');if(!e||!b)return;
+b.addEventListener('click',function(){var o=e.classList.toggle('ouvert');b.setAttribute('aria-expanded',o?'true':'false');b.firstChild.textContent=o?'Fermer ':'Menu ';});
+Array.prototype.forEach.call(document.querySelectorAll('.m-panneau a'),function(a){a.addEventListener('click',function(){e.classList.remove('ouvert');b.setAttribute('aria-expanded','false');b.firstChild.textContent='Menu ';});});})();
+
 (function () {
   // Origine du visiteur (QR code, Google, site d'un partenaire…), jointe à la demande de rappel.
   // Rien n'est enregistré sur le téléphone ou l'ordinateur du visiteur (ni cookie, ni stockage).
@@ -402,6 +453,14 @@ summary{font-size:18px!important;min-height:68px!important}
   // Téléphone : FAQ entièrement repliée au départ
   if (window.matchMedia && window.matchMedia('(max-width: 760px)').matches) {
     Array.prototype.forEach.call(document.querySelectorAll('#faq details[open]'), function (d) { d.removeAttribute('open'); });
+  }
+
+  // Bouton WhatsApp : apparaît une fois le haut de page dépassé (il ne cache pas le bouton principal)
+  var wa = document.querySelector('.wa-flottant');
+  if (wa) {
+    var majWa = function () { wa.classList.toggle('visible', window.scrollY > 520); };
+    window.addEventListener('scroll', majWa, { passive: true });
+    majWa();
   }
 
   var form = document.getElementById('formulaire');
