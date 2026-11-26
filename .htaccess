@@ -38,7 +38,7 @@ AddType image/x-icon .ico
 <IfModule mod_expires.c>
   ExpiresActive On
   ExpiresDefault "access plus 1 hour"
-  ExpiresByType text/html "access plus 10 minutes"
+  ExpiresByType text/html "access plus 0 seconds"
   ExpiresByType image/svg+xml "access plus 30 days"
   ExpiresByType image/png "access plus 30 days"
   ExpiresByType image/jpeg "access plus 30 days"
@@ -53,6 +53,10 @@ AddType image/x-icon .ico
   Header always set X-Frame-Options "SAMEORIGIN"
   Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), interest-cohort=()"
   Header always set Strict-Transport-Security "max-age=15552000"
+  # Pages toujours vérifiées auprès du serveur : une mise à jour se voit tout de suite
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
   <FilesMatch "\.(woff)$">
     Header set Access-Control-Allow-Origin "*"
   </FilesMatch>
